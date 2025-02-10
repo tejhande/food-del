@@ -52,3 +52,137 @@
         text-align: center;
     }
 }
+
+.Footer{
+    color: #d9d9d9;
+    background-color: #323232;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 8vw;
+    padding-top: 80px;
+    margin-top: 100px;
+}
+
+.FooterContent{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 80px;
+}
+
+.FooterContentLeft, .FooterContentRight, .FooterContentCenter{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 20px;
+}
+
+.FooterContentLeft li, .FooterContentRight li , .FooterContentCenter li{
+    list-style:  none;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.FooterContentRight h2 , .FooterContentCenter h2{
+    color: #fff;
+}
+/* 
+.FooterSocialIcons img{
+    width: 40px;
+    margin-right: 15px;
+} */
+
+.Footer hr{
+    margin: 20px 0px;
+    width: 100%;
+    height: 2px;
+    background-color: gray;
+    border: none;
+}
+
+@media (max-width: 750px) {
+    .FooterContent{
+        display: flex;
+        flex-direction: column;
+        gap: 35px;
+    }
+
+    .FooterCopyright{
+        text-align: center;
+    }
+        .FooterContentLeft img{
+        max-width: 90vw;
+        margin-left: -12px;
+    }
+}
+
+
+.Btn {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: transparent;
+    position: relative;
+    /* overflow: hidden; */
+    border-radius: 7px;
+    cursor: pointer;
+    transition: all .3s;
+  }
+  
+  .svgContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    backdrop-filter: blur(0px);
+    letter-spacing: 0.8px;
+    border-radius: 10px;
+    transition: all .3s;
+    border: 1px solid rgba(156, 156, 156, 0.466);
+  }
+  
+  .BG {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: #181818;
+    z-index: -1;
+    border-radius: 10px;
+    pointer-events: none;
+    transition: all .3s;
+  }
+  
+  .Btn:hover .BG {
+    transform: rotate(35deg);
+    transform-origin: bottom;
+  }
+  
+  .Btn:hover .svgContainer {
+    background-color: rgba(156, 156, 156, 0.466);
+    backdrop-filter: blur(4px);
+  }
+  
+
+  .FooterSocialIcons {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 20px !important; /* Adjust this value to control spacing between buttons */
+  }
+  
+  .FooterSocialIcons a {
+    text-decoration: none !important;
+  }
+  
+  .FooterSocialIcons .Btn {
+    margin: 0 !important; /* Remove any default margins */
+  }
