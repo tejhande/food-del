@@ -51,6 +51,11 @@
     .footer-copyright{
         text-align: center;
     }
+
+    img{
+        max-width: 90vw;
+        margin-left: -12px;
+    }
 }
 
 .Footer{
