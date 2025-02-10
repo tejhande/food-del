@@ -66,3 +66,57 @@
     font-weight: 500;
     cursor: pointer;
 }
+
+
+/* General input styling for consistency */
+.login-popup-inputs input {
+    width: 100%;
+    padding: 10px 15px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* To ensure the padding doesn't affect width */
+}
+
+/* Specific styling for the password field */
+.password-field {
+    position: relative;
+}
+
+.password-field input {
+    padding-right: 35px; /* Adds space for the eye icon inside the input box */
+}
+
+.eye-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+}
+
+button {
+    width: 100%;
+    padding: 12px 0;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.login-popup-condition {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.login-popup-condition input {
+    margin-right: 10px;
+}

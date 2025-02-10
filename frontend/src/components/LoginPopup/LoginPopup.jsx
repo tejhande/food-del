@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 
 const LoginPopup = ({ setShowLogin }) => {
 
-    const { setToken, url,loadCartData } = useContext(StoreContext)
+    const { setToken, url, loadCartData } = useContext(StoreContext)
     const [currState, setCurrState] = useState("Sign Up");
 
     const [data, setData] = useState({
@@ -15,6 +15,9 @@ const LoginPopup = ({ setShowLogin }) => {
         email: "",
         password: ""
     })
+
+    // State for toggling password visibility
+    const [showPassword, setShowPassword] = useState(false);
 
     const onChangeHandler = (event) => {
         const name = event.target.name
@@ -36,7 +39,7 @@ const LoginPopup = ({ setShowLogin }) => {
         if (response.data.success) {
             setToken(response.data.token)
             localStorage.setItem("token", response.data.token)
-            loadCartData({token:response.data.token})
+            loadCartData({ token: response.data.token })
             setShowLogin(false)
         }
         else {
@@ -53,11 +56,24 @@ const LoginPopup = ({ setShowLogin }) => {
                 <div className="login-popup-inputs">
                     {currState === "Sign Up" ? <input name='name' onChange={onChangeHandler} value={data.name} type="text" placeholder='Enter Your Name' required /> : <></>}
                     <input name='email' onChange={onChangeHandler} value={data.email} type="email" placeholder='Enter Your Email' />
-                    <input name='password' onChange={onChangeHandler} value={data.password} type="password" placeholder='Enter Password' required />
+
+                    <div className="password-field">
+                        <input
+                            name='password'
+                            onChange={onChangeHandler}
+                            value={data.password}
+                            type={showPassword ? 'text' : 'password'}
+                            placeholder='Enter Password'
+                            required
+                        />
+                        <span className="eye-icon" onClick={() => setShowPassword(!showPassword)}>
+                            {showPassword ? '👁‍🗨' : '👁️'}
+                        </span>
+                    </div>
                 </div>
                 <button>{currState === "Login" ? "Login" : "Create account"}</button>
                 <div className="login-popup-condition">
-                    <input type="checkbox" name="" id="" required/>
+                    <input type="checkbox" name="" id="" required />
                     <p>By continuing, I agree to the terms of use & privacy policy.</p>
                 </div>
                 {currState === "Login"
