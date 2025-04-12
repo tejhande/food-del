@@ -137,6 +137,9 @@
     font-size: 1.6rem;
   }
 
+  .order-item {
+    min-width: 90vw;
+  }
   .order-list {
     grid-template-columns: 1fr;
   }
