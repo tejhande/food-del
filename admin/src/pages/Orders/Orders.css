@@ -21,7 +21,7 @@
 
 .order {
   font-family: 'Poppins', sans-serif;
-  max-width: 1200px;
+  max-width: 80vw;
   margin: 0 auto;
   padding: 2rem 1.5rem;
   background-color: var(--off-white);
@@ -49,8 +49,8 @@
 }
 
 .order-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 2rem;
 }
 
@@ -64,6 +64,7 @@
   gap: 1rem;
   transition: var(--transition);
   position: relative;
+  max-width: calc(100vw/4.15);
 }
 
 .order-item:hover {
