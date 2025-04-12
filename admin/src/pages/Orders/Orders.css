@@ -138,7 +138,7 @@
   }
 
   .order-item {
-    min-width: 90vw;
+    min-width: 65vw;
   }
   .order-list {
     grid-template-columns: 1fr;
