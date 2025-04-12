@@ -10,6 +10,7 @@ import MyOrders from './pages/MyOrders/MyOrders'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Verify from './pages/Verify/Verify'
+import NotFound from './pages/NotFound/NotFound';
 
 const App = () => {
 
@@ -27,6 +28,7 @@ const App = () => {
           <Route path='/order' element={<PlaceOrder />}/>
           <Route path='/myorders' element={<MyOrders />}/>
           <Route path='/verify' element={<Verify />}/>
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
       <Footer />
