@@ -22,7 +22,7 @@
   margin: 0 auto;
   padding: 2rem 1.5rem;
   background-color: var(--off-white);
-  min-height: 80vh;
+  max-height: 70vh;
 }
 
 form.flex-col {
