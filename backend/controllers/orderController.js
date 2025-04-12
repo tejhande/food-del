@@ -7,7 +7,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const currency = "inr";
 const deliveryCharge = 50;
 // const frontend_URL = 'http://localhost:5173';
-const frontend_URL = 'https://windspeedd.vercel.app';
+const frontend_URL = 'https://windspeed.vercel.app';
 
 // Placing User Order for Frontend using stripe
 const placeOrder = async (req, res) => {

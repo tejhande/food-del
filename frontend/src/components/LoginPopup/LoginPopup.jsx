@@ -93,13 +93,13 @@ const LoginPopup = ({ setShowLogin }) => {
             </span>
           </div>
         </div>
-        <button>{currState === "Login" ? "Login" : "Create account"}</button>
         <div className="login-popup-condition">
           <input type="checkbox" id="terms-checkbox" required />
           <label htmlFor="terms-checkbox" className="terms-label">
             By continuing, I agree to the terms of use & privacy policy.
           </label>
         </div>
+        <button>{currState === "Login" ? "Login" : "Create account"}</button>
 
         {currState === "Login" ? (
           <p>
