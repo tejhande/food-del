@@ -27,39 +27,56 @@ const MyOrders = () => {
     <div className="my-orders">
       <h2>My Orders</h2>
       <div className="container">
-        {[...data].reverse().map((order, index) => {
+      {[...data].reverse().map((order, index) => {
           return (
             <div key={index} className="my-orders-order">
-              style=
-              {{
-                backgroundImage: `url(${url}/images/${order.items[0].image})`, // First item's image as background
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                height: "250px", // Fixed height for each order box
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "flex-end",
-                padding: "10px",
-                borderRadius: "8px",
-                color: "white",
-              }}
+              {/* Display item images in a grid layout */}
+              <div
+                className="order-item-images"
+                style={{ display: "flex", justifyContent: "space-between" }}
+              >
+                {order.items.map((item, idx) => {
+                  return (
+                    <div key={idx} style={{ flex: 1 }}>
+                      <img
+                        src={url + "/images/" + item.image}
+                        alt={item.name}
+                        style={{
+                          width: "100%",
+                          objectFit: "cover",
+                          borderRadius: "8px",
+                          marginBottom: "10px",
+                        }}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Display order item names and quantity */}
               <p>
                 {order.items.map((item, index) => {
-                  if (index === order.items.length - 1) {
-                    return item.name + " x " + item.quantity;
-                  } else {
-                    return item.name + " x " + item.quantity + ", ";
-                  }
+                  return index === order.items.length - 1
+                    ? `${item.name} x ${item.quantity}`
+                    : `${item.name} x ${item.quantity}, `;
                 })}
               </p>
+
+              {/* Display order amount */}
               <p>
                 {currency}
                 {order.amount}.00
               </p>
+
+              {/* Display number of items */}
               <p>Items: {order.items.length}</p>
+
+              {/* Display order status */}
               <p>
                 <span>&#x25cf;</span> <b>{order.status}</b>
               </p>
+
+              {/* Track order button */}
               <button onClick={fetchOrders}>Track Order</button>
             </div>
           );
