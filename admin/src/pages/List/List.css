@@ -19,10 +19,9 @@
 .list {
   font-family: 'Poppins', sans-serif;
   max-width: 1200px;
-  margin: 0 auto;
   padding: 2rem 1.5rem;
   background-color: var(--off-white);
-  min-height: 80vh;
+  height: 100vh;
 }
 
 .list > p {
@@ -46,7 +45,7 @@
 }
 
 .list-table {
-  width: 100%;
+  width: 75vw;
   background-color: var(--pure-white);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow-sm);
