@@ -67,3 +67,10 @@
     font-weight: 500;
     margin: 10px 0px;
 }
+
+@media (max-width: 750px) {
+    img {
+        max-width: 90vw;
+        margin-left: 0px !important;;
+    }
+}

@@ -45,8 +45,9 @@
 @media (max-width:750px) {
     .footer-content{
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         gap: 35px;
+        flex-wrap: wrap;
     }
     .footer-copyright{
         text-align: center;
