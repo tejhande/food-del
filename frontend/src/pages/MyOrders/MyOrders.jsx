@@ -6,15 +6,23 @@ import { assets } from "../../assets/assets";
 
 const MyOrders = () => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { url, token, currency } = useContext(StoreContext);
 
   const fetchOrders = async () => {
-    const response = await axios.post(
-      url + "/api/order/userorders",
-      {},
-      { headers: { token } }
-    );
-    setData(response.data.data);
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        url + "/api/order/userorders",
+        {},
+        { headers: { token } }
+      );
+      setData(response.data.data);
+    } catch (error) {
+      console.error("Error fetching orders:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -23,64 +31,95 @@ const MyOrders = () => {
     }
   }, [token]);
 
+  // Function to determine status class
+  const getStatusClass = (status) => {
+    switch (status.toLowerCase()) {
+      case 'food processing':
+        return 'processing';
+      case 'out for delivery':
+        return 'out-for-delivery';
+      case 'delivered':
+        return 'delivered';
+      default:
+        return 'processing'; // Default fallback
+    }
+  };
+
   return (
     <div className="my-orders">
       <h2>My Orders</h2>
       <div className="container">
-      {[...data].reverse().map((order, index) => {
-          return (
+        {loading ? (
+          // Display skeleton loaders while fetching data
+          Array(3).fill().map((_, index) => (
+            <div key={`skeleton-${index}`} className="my-orders-order skeleton">
+              <div className="order-item-images skeleton-images">
+                {Array(3).fill().map((_, idx) => (
+                  <div key={idx} className="skeleton-image"></div>
+                ))}
+              </div>
+              <div className="skeleton-text"></div>
+              <div className="skeleton-price"></div>
+              <div className="skeleton-items"></div>
+              <div className="skeleton-status"></div>
+              <div className="skeleton-button"></div>
+            </div>
+          ))
+        ) : data.length === 0 ? (
+          <div className="no-orders">
+            <img src={assets.emptyCart} alt="No Orders" />
+            <h3>No orders yet</h3>
+            <p>Looks like you haven't placed any orders yet!</p>
+          </div>
+        ) : (
+          [...data].reverse().map((order, index) => (
             <div key={index} className="my-orders-order">
-              {/* Display item images in a grid layout */}
-              <div
-                className="order-item-images"
-                style={{ display: "flex", justifyContent: "space-between" }}
-              >
-                {order.items.map((item, idx) => {
-                  return (
-                    <div key={idx} style={{ flex: 1 }}>
-                      <img
-                        src={url + "/images/" + item.image}
-                        alt={item.name}
-                        style={{
-                          width: "100%",
-                          objectFit: "cover",
-                          borderRadius: "8px",
-                          marginBottom: "10px",
-                        }}
-                      />
-                    </div>
-                  );
-                })}
+              <div className="order-item-images">
+                {order.items.map((item, idx) => (
+                  <div key={idx}>
+                    <img
+                      src={url + "/images/" + item.image}
+                      alt={item.name}
+                    />
+                  </div>
+                ))}
               </div>
 
-              {/* Display order item names and quantity */}
               <p>
-                {order.items.map((item, index) => {
-                  return index === order.items.length - 1
+                {order.items.map((item, index) => (
+                  index === order.items.length - 1
                     ? `${item.name} x ${item.quantity}`
-                    : `${item.name} x ${item.quantity}, `;
-                })}
+                    : `${item.name} x ${item.quantity}, `
+                ))}
               </p>
 
-              {/* Display order amount */}
               <p>
-                {currency}
-                {order.amount}.00
+                {currency} {order.amount}.00
               </p>
 
-              {/* Display number of items */}
               <p>Items: {order.items.length}</p>
 
-              {/* Display order status */}
-              <p>
-                <span>&#x25cf;</span> <b>{order.status}</b>
-              </p>
+              <div className={`status-indicator ${getStatusClass(order.status)}`}>
+                <span></span>
+                <b>{order.status}</b>
+              </div>
 
-              {/* Track order button */}
-              <button onClick={fetchOrders}>Track Order</button>
+              {/* Only show Track Order button if not delivered */}
+              {order.status.toLowerCase() !== 'delivered' && (
+                <button onClick={() => window.open(`/track/${order._id}`, '_blank')}>
+                  Track Order
+                </button>
+              )}
+              
+              {/* Show different button if delivered */}
+              {order.status.toLowerCase() === 'delivered' && (
+                <button onClick={() => window.open(`/review/${order._id}`, '_blank')}>
+                  Write Review
+                </button>
+              )}
             </div>
-          );
-        })}
+          ))
+        )}
       </div>
     </div>
   );
