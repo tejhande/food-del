@@ -7,7 +7,8 @@ import List from './pages/List/List'
 import Orders from './pages/Orders/Orders'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import NotFound from '../frontend/src/pages/NotFound/NotFound';
+import NotFound from './pages/NotFound/NotFound';  // Adjusted import path
+
 
 const App = () => {
   return (
