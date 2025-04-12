@@ -138,3 +138,37 @@
     height: 40px;
   }
 }
+
+
+.delete-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ff4d4d; /* Red button */
+  color: white;
+  border: 1px solid #ff0000;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+  background-color: #e60000; /* Darker red on hover */
+}
+
+.delete-button .text {
+  margin-right: 8px; /* Space between text and icon */
+}
+
+.delete-button .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-button svg {
+  width: 16px; /* Adjust icon size */
+  height: 16px;
+  fill: white;
+}
