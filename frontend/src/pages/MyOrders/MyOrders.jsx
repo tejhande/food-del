@@ -34,14 +34,14 @@ const MyOrders = () => {
   // Function to determine status class
   const getStatusClass = (status) => {
     switch (status.toLowerCase()) {
-      case 'food processing':
-        return 'processing';
-      case 'out for delivery':
-        return 'out-for-delivery';
-      case 'delivered':
-        return 'delivered';
+      case "food processing":
+        return "processing";
+      case "out for delivery":
+        return "out-for-delivery";
+      case "delivered":
+        return "delivered";
       default:
-        return 'processing'; // Default fallback
+        return "processing"; // Default fallback
     }
   };
 
@@ -51,20 +51,27 @@ const MyOrders = () => {
       <div className="container">
         {loading ? (
           // Display skeleton loaders while fetching data
-          Array(3).fill().map((_, index) => (
-            <div key={`skeleton-${index}`} className="my-orders-order skeleton">
-              <div className="order-item-images skeleton-images">
-                {Array(3).fill().map((_, idx) => (
-                  <div key={idx} className="skeleton-image"></div>
-                ))}
+          Array(3)
+            .fill()
+            .map((_, index) => (
+              <div
+                key={`skeleton-${index}`}
+                className="my-orders-order skeleton"
+              >
+                <div className="order-item-images skeleton-images">
+                  {Array(3)
+                    .fill()
+                    .map((_, idx) => (
+                      <div key={idx} className="skeleton-image"></div>
+                    ))}
+                </div>
+                <div className="skeleton-text"></div>
+                <div className="skeleton-price"></div>
+                <div className="skeleton-items"></div>
+                <div className="skeleton-status"></div>
+                <div className="skeleton-button"></div>
               </div>
-              <div className="skeleton-text"></div>
-              <div className="skeleton-price"></div>
-              <div className="skeleton-items"></div>
-              <div className="skeleton-status"></div>
-              <div className="skeleton-button"></div>
-            </div>
-          ))
+            ))
         ) : data.length === 0 ? (
           <div className="no-orders">
             <img src={assets.emptyCart} alt="No Orders" />
@@ -77,20 +84,17 @@ const MyOrders = () => {
               <div className="order-item-images">
                 {order.items.map((item, idx) => (
                   <div key={idx}>
-                    <img
-                      src={url + "/images/" + item.image}
-                      alt={item.name}
-                    />
+                    <img src={url + "/images/" + item.image} alt={item.name} />
                   </div>
                 ))}
               </div>
 
               <p>
-                {order.items.map((item, index) => (
+                {order.items.map((item, index) =>
                   index === order.items.length - 1
                     ? `${item.name} x ${item.quantity}`
                     : `${item.name} x ${item.quantity}, `
-                ))}
+                )}
               </p>
 
               <p>
@@ -99,24 +103,15 @@ const MyOrders = () => {
 
               <p>Items: {order.items.length}</p>
 
-              <div className={`status-indicator ${getStatusClass(order.status)}`}>
+              <div
+                className={`status-indicator ${getStatusClass(order.status)}`}
+              >
                 <span></span>
                 <b>{order.status}</b>
               </div>
-
-              {/* Only show Track Order button if not delivered */}
-              {order.status.toLowerCase() !== 'delivered' && (
-                <button onClick={() => window.open(`/track/${order._id}`, '_blank')}>
-                  Track Order
-                </button>
-              )}
               
-              {/* Show different button if delivered */}
-              {order.status.toLowerCase() === 'delivered' && (
-                <button onClick={() => window.open(`/review/${order._id}`, '_blank')}>
-                  Write Review
-                </button>
-              )}
+              {/* Track order button */}
+              <button onClick={fetchOrders}>Track Order</button>
             </div>
           ))
         )}
